@@ -7,12 +7,14 @@ class ApplicationController < ActionController::Base
   end
   
   def after_sign_out_path_for(resource)
-    about_path
+    users_new_path
   end
   
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name]) #{ |u| u.permit(:username, :email, :password_confirmation, :remember_me)}
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:name])# { |u| u.permit(:login, :username, :password)} 
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name]) #{ |u| u.permit(:username, :email, :password, :password_confirmation, :current_password))
   end
 end

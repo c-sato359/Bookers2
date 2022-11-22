@@ -1,2 +1,28 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h1>User info</h1>
+
+<diV></diV>
+<div>name</div>
+<div>introduction</div>
+  <table>
+
+<h2>New book</h2>
+  <% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this book from being saved
+        <ul>
+         <% @book.errors.full_messages.each do |message| %>
+           <li><%= message %></li>
+         <% end %>
+        </ul>
+  <% end %>
+  
+ <%= form_with model: @book do |f| %>
+   <div>
+        <label>Title</label>
+        <div class="field"><%= f.text_field :title %></div>
+    </div>
+    <div>
+        <label>Opinion</label>
+        <div class="field"><%= f.text_area :body %></div>
+    </div>
+    <div class="field"><%= f.submit 'Create Book'%></div>
+    <% end %>
